@@ -1,0 +1,36 @@
+const taskInput = document.getElementById("taskinput");
+const Addtaskbutton = document.getElementById("addtaskbutton");
+const tasklist = document.getElementById("tasklist")
+
+//Add event listener to the buttton//
+Addtaskbutton.addEventListener("click", function () {
+    const taskText = taskinput.value.trim();
+    
+    //check if the input is not empty//
+    if (taskText !==""){
+        const taskItem = document.createElement("li");
+        taskItem.textContent=taskText;
+
+        //add a delete button to the task//
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "Delete";
+        deleteButton.style.marginLeft="10px";
+        deleteButton.style.cursor = "pointer";
+
+    //Add functionality to remove the task//
+    deleteButton.addEventListener("click", function (){
+        tasklist.removeChild(taskItem);
+    });
+
+
+    //append the delete button to the task item
+    taskItem.appendChild(deleteButton);
+
+    //append the task item to the task list
+    tasklist.appendChild(taskItem);
+
+    //clear the input field
+    taskInput.value = "";
+    }
+
+});
