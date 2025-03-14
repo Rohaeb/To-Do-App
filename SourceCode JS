@@ -20,17 +20,36 @@ Addtaskbutton.addEventListener("click", function () {
     //Add functionality to remove the task//
     deleteButton.addEventListener("click", function (){
         tasklist.removeChild(taskItem);
+
+
     });
 
+        //adding checkbox next to task
+          const checkboxButton = document.createElement("button");
+          checkboxButton.textContent = "Completed";
+          checkboxButton.style.cursor = "pointer";
+          checkboxButton.marginLeft="10px";
+    
+          checkboxButton.addEventListener("click", function(){
+            taskItem.style.textDecoration = "line-through";
+            taskItem.style.textDecorationColor = "green";
+            checkboxButton.disabled = true;
+
+          })
 
     //append the delete button to the task item
     taskItem.appendChild(deleteButton);
 
+    taskItem.appendChild(checkboxButton);
     //append the task item to the task list
     tasklist.appendChild(taskItem);
 
+  
     //clear the input field
     taskInput.value = "";
     }
 
+
+
 });
+
