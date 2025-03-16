@@ -1,34 +1,46 @@
 const taskInput = document.getElementById("taskinput");
 const Addtaskbutton = document.getElementById("addtaskbutton");
 const tasklist = document.getElementById("tasklist")
+const clearAllButton = document.createElement("button");
+
+//Create the "Delete all tasks" button outside the individual task creation
+clearAllButton.textContent = "Delete all tasks";
+clearAllButton.style.cursor = "pointer";
+clearAllButton.style.marginTop= "10px";
+document.body.appendChild(clearAllButton);
+
+//Add event Listener to the "Delete all Tasks" button
+clearAllButton.addEventListener("click", function(){
+    tasklist.innerHTML = "";
+});
+
 
 //Add event listener to the buttton//
 Addtaskbutton.addEventListener("click", function () {
     const taskText = taskinput.value.trim();
     
-    //check if the input is not empty//
-    if (taskText !==""){
-        const taskItem = document.createElement("li");
-        taskItem.textContent=taskText;
+//check if the input is not empty//
+if (taskText !==""){
+    const taskItem = document.createElement("li");
+    taskItem.textContent=taskText;
 
-        //add a delete button to the task//
-        const deleteButton = document.createElement("button");
+//add a delete button to the task//
+    const deleteButton = document.createElement("button");
         deleteButton.textContent = "Delete";
-        deleteButton.style.marginLeft="10px";
+        deleteButton.style.marginLeft="15px";
         deleteButton.style.cursor = "pointer";
 
-    //Add functionality to remove the task//
+        //Add functionality to remove the task//
     deleteButton.addEventListener("click", function (){
         tasklist.removeChild(taskItem);
 
 
     });
-
-        //adding checkbox next to task
-          const checkboxButton = document.createElement("button");
-          checkboxButton.textContent = "Completed";
-          checkboxButton.style.cursor = "pointer";
-          checkboxButton.marginLeft="10px";
+ //adding checkbox next to task
+    const checkboxButton = document.createElement("button");
+        checkboxButton.textContent = "Completed";
+        checkboxButton.style.cursor = "pointer";
+        checkboxButton.marginLeft="15px";
     
           checkboxButton.addEventListener("click", function(){
             taskItem.style.textDecoration = "line-through";
@@ -40,10 +52,13 @@ Addtaskbutton.addEventListener("click", function () {
     //append the delete button to the task item
     taskItem.appendChild(deleteButton);
 
+    //append the checkbox button to task list
     taskItem.appendChild(checkboxButton);
+    
     //append the task item to the task list
     tasklist.appendChild(taskItem);
 
+    
   
     //clear the input field
     taskInput.value = "";
@@ -51,5 +66,5 @@ Addtaskbutton.addEventListener("click", function () {
 
 
 
-});
 
+});
