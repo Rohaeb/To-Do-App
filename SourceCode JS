@@ -4,12 +4,15 @@ const tasklist = document.getElementById("tasklist")
 const clearAllButton = document.createElement("button");
 const completed_tasks = document.getElementById("completedCount");
 const pending_tasks = document.getElementById("pendingCount");
+const total_tasks = document.getElementById("totalCount");
 
 let completedCount = 0;
 let pendingCount = 0;
+let totalCount = 0;
 function updateCounters() {
     completed_tasks.textContent = `Tasks Completed: ${completedCount}`;
     pending_tasks.textContent = `Pending Tasks: ${pendingCount}`;
+    total_tasks.textContent = `Total Tasks: ${totalCount}`;
 }
 //Create the "Delete all tasks" button outside the individual task creation
 clearAllButton.textContent = "Delete all tasks";
@@ -23,6 +26,7 @@ clearAllButton.addEventListener("click", function(){
 
     completedCount = 0;
     pendingCount = 0;
+    totalCount = 0;
     updateCounters();
 
 });
@@ -35,6 +39,7 @@ Addtaskbutton.addEventListener("click", function () {
 //check if the input is not empty//
 if (taskText !==""){
     pendingCount++;
+    totalCount++;
     updateCounters();
 
     const taskItem = document.createElement("li");
@@ -55,7 +60,7 @@ if (taskText !==""){
         else{
             completedCount --;
         }
-       
+       totalCount --;
         updateCounters();
 
 
