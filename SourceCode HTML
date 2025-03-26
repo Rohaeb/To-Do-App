@@ -3,21 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="java.css">
     <title>To-Do App</title>
 </head>
 <body>
     <header>
     <h1> To-do-List tool!</h1>
     <P>This tool will help you become more productive! </P>
-    <h3 id="completedCount"> Tasks Completed: 0 </h3>
-    <h3 id="pendingCount"> Pending Tasks: 0 </h3>
+    <h3 id="completedCount"> Tasks Completed: 0</h3>
+    <h3 id="pendingCount"> Pending Tasks: 0</h3>
+    <h3 id="totalCount"> Total Tasks: 0</h3>
 </header>
 <div class="container">
-    <h1> To-Do List</h1>
+    <h1 id="title"> To-Do List</h1>
     <input type="text" id="taskinput" placeholder="Add a new task">
     <button id="addtaskbutton"> Add Task</button>
-    <li id="tasklist"></li>
+    <ol id="tasklist"></ol>
 </div>
+
 <script src="script.js"></script>
 </body>
 </html>
