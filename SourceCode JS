@@ -49,14 +49,12 @@ if (taskText !==""){
         //Add functionality to remove the task//
     deleteButton.addEventListener("click", function (){
         tasklist.removeChild(taskItem);
-        if (taskItem.style.textDecoration != "line-through"){
+        if (!taskItem.style.textDecoration.includes ("line-through")){
             pendingCount --;
         }
         else{
             completedCount --;
         }
-
-            completedCount--;
        
         updateCounters();
 
