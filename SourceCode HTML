@@ -9,6 +9,8 @@
     <header>
     <h1> To-do-List tool!</h1>
     <P>This tool will help you become more productive! </P>
+    <h3 id="completedCount"> Tasks Completed: 0 </h3>
+    <h3 id="pendingCount"> Pending Tasks: 0 </h3>
 </header>
 <div class="container">
     <h1> To-Do List</h1>
