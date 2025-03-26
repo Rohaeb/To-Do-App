@@ -2,7 +2,15 @@ const taskInput = document.getElementById("taskinput");
 const Addtaskbutton = document.getElementById("addtaskbutton");
 const tasklist = document.getElementById("tasklist")
 const clearAllButton = document.createElement("button");
+const completed_tasks = document.getElementById("completedCount");
+const pending_tasks = document.getElementById("pendingCount");
 
+let completedCount = 0;
+let pendingCount = 0;
+function updateCounters() {
+    completed_tasks.textContent = `Tasks Completed: ${completedCount}`;
+    pending_tasks.textContent = `Pending Tasks: ${pendingCount}`;
+}
 //Create the "Delete all tasks" button outside the individual task creation
 clearAllButton.textContent = "Delete all tasks";
 clearAllButton.style.cursor = "pointer";
@@ -12,6 +20,11 @@ document.body.appendChild(clearAllButton);
 //Add event Listener to the "Delete all Tasks" button
 clearAllButton.addEventListener("click", function(){
     tasklist.innerHTML = "";
+
+    completedCount = 0;
+    pendingCount = 0;
+    updateCounters();
+
 });
 
 
@@ -21,6 +34,9 @@ Addtaskbutton.addEventListener("click", function () {
     
 //check if the input is not empty//
 if (taskText !==""){
+    pendingCount++;
+    updateCounters();
+
     const taskItem = document.createElement("li");
     taskItem.textContent=taskText;
 
@@ -33,6 +49,16 @@ if (taskText !==""){
         //Add functionality to remove the task//
     deleteButton.addEventListener("click", function (){
         tasklist.removeChild(taskItem);
+        if (taskItem.style.textDecoration != "line-through"){
+            pendingCount --;
+        }
+        else{
+            completedCount --;
+        }
+
+            completedCount--;
+       
+        updateCounters();
 
 
     });
@@ -40,26 +66,72 @@ if (taskText !==""){
     const checkboxButton = document.createElement("button");
         checkboxButton.textContent = "Completed";
         checkboxButton.style.cursor = "pointer";
-        checkboxButton.marginLeft="15px";
+        checkboxButton.style.marginLeft="15px";
+        checkboxButton.style.gap="20px";
     
+    
+        
+        
           checkboxButton.addEventListener("click", function(){
             taskItem.style.textDecoration = "line-through";
             taskItem.style.textDecorationColor = "green";
             checkboxButton.disabled = true;
+                pendingCount--;
+                completedCount++;
+                updateCounters();
+
+
+
 
           })
 
+          //adding edit button
+          const editButton = document.createElement("button");
+          editButton.textContent="edit";
+          editButton.style.cursor="pointer";
+          editButton.style.marginLeft="15px";
+
+          
+          editButton.addEventListener("click",function(){
+            taskItem.appendChild(editButton);
+
+            const inputField = document.createElement("input");
+            inputField.type = "text";
+            inputField.value = taskItem.firstChild.textContent;
+            taskItem.textContent="";
+            taskItem.appendChild(inputField);
+
+            const save = document.createElement("button");
+            save.textContent="save";
+            save.style.cursor="pointer";
+            taskItem.appendChild(save);
+            save.addEventListener("click",function(){
+                taskItem.textContent = inputField.value;
+
+                taskItem.appendChild(deleteButton);
+                taskItem.appendChild(checkboxButton);
+                taskItem.appendChild(editButton);
+            })
+
+          });
+          
+
+
+    
+    
     //append the delete button to the task item
     taskItem.appendChild(deleteButton);
 
     //append the checkbox button to task list
     taskItem.appendChild(checkboxButton);
+
+
+    taskItem.appendChild(editButton);
+  
     
     //append the task item to the task list
     tasklist.appendChild(taskItem);
 
-    
-  
     //clear the input field
     taskInput.value = "";
     }
