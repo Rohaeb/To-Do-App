@@ -1,10 +1,15 @@
 const taskInput = document.getElementById("taskinput");
 const Addtaskbutton = document.getElementById("addtaskbutton");
-const tasklist = document.getElementById("tasklist")
+const tasklistP = document.getElementById("tasklistPersonal");
+const tasklistS = document.getElementById("tasklistSchool");
+const tasklistW = document.getElementById("tasklistWork");
 const clearAllButton = document.createElement("button");
 const completed_tasks = document.getElementById("completedCount");
 const pending_tasks = document.getElementById("pendingCount");
 const total_tasks = document.getElementById("totalCount");
+const pcheck = document.getElementById("checkBoxL");
+const wcheck = document.getElementById("checkBoxW");
+const scheck = document.getElementById("checkBoxS");
 
 let completedCount = 0;
 let pendingCount = 0;
@@ -37,13 +42,14 @@ Addtaskbutton.addEventListener("click", function () {
     const taskText = taskinput.value.trim();
     
 //check if the input is not empty//
-if (taskText !==""){
+if (taskText !=="" && (pcheck.checked || wcheck.checked || scheck.checked)){
     pendingCount++;
     totalCount++;
     updateCounters();
 
     const taskItem = document.createElement("li");
     taskItem.textContent=taskText;
+
 
 //add a delete button to the task//
     const deleteButton = document.createElement("button");
@@ -53,7 +59,7 @@ if (taskText !==""){
 
         //Add functionality to remove the task//
     deleteButton.addEventListener("click", function (){
-        tasklist.removeChild(taskItem);
+        tasklistP.removeChild(taskItem);
         if (!taskItem.style.textDecoration.includes ("line-through")){
             pendingCount --;
         }
@@ -121,7 +127,16 @@ if (taskText !==""){
 
 
     
-    
+    //append the task item to the task list
+    if (pcheck.checked){
+        tasklistP.appendChild(taskItem);
+    }
+    else if (wcheck.checked){
+        tasklistW.appendChild(taskItem);
+    } else if(scheck.checked){
+        tasklistS.appendChild(taskItem);
+    }
+
     //append the delete button to the task item
     taskItem.appendChild(deleteButton);
 
@@ -132,8 +147,6 @@ if (taskText !==""){
     taskItem.appendChild(editButton);
   
     
-    //append the task item to the task list
-    tasklist.appendChild(taskItem);
 
     //clear the input field
     taskInput.value = "";
