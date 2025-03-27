@@ -17,8 +17,31 @@
 <div class="container">
     <h1 id="title"> To-Do List</h1>
     <input type="text" id="taskinput" placeholder="Add a new task">
+    <!--Personal Checkbox-->
+    <label for="personalcheckBox">Personal?</label>
+    <input type="checkbox" id="checkBoxL">
+
+    <!-- Work Checkbox-->
+    <label for="workcheckbox">Work?</label>
+    <input type="checkbox" id="checkBoxW">
+
+    <!-- School Checkbox-->
+    <label for="schoolcheckbox">School? </label>
+    <input type="checkbox" id="checkBoxS">
     <button id="addtaskbutton"> Add Task</button>
-    <ol id="tasklist"></ol>
+    <div id="tasklist">
+        <h3>Personal Tasks</h3>
+        <ol id="tasklistPersonal"></ol>
+
+        <h3>Work Tasks</h3>
+        <ol id="tasklistWork"></ol>
+
+        <h3>School Tasks</h3>
+        <ol id="tasklistSchool"></ol>
+    </div>
+</div>
+
+</div>
 </div>
 
 <script src="script.js"></script>
