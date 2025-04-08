@@ -27,7 +27,9 @@ document.body.appendChild(clearAllButton);
 
 //Add event Listener to the "Delete all Tasks" button
 clearAllButton.addEventListener("click", function(){
-    tasklist.innerHTML = "";
+    tasklistP.innerHTML = "";
+    tasklistW.innerHTML="";
+    tasklistS.innterHTML="";
 
     completedCount = 0;
     pendingCount = 0;
@@ -59,7 +61,14 @@ if (taskText !=="" && (pcheck.checked || wcheck.checked || scheck.checked)){
 
         //Add functionality to remove the task//
     deleteButton.addEventListener("click", function (){
-        tasklistP.removeChild(taskItem);
+        if (tasklistP.contains(taskItem)){
+            tasklistP.removeChild(taskItem)
+        } else if (tasklistS.contains(taskItem)){
+            tasklistS.removeChild(taskItem)
+        } else if (tasklistW.contains(taskItem)){
+            tasklistW.removeChild(taskItem)
+        };
+    
         if (!taskItem.style.textDecoration.includes ("line-through")){
             pendingCount --;
         }
